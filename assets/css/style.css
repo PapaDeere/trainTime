@@ -1,0 +1,45 @@
+body {
+
+}
+
+.jumbotron {
+	padding-top: 15px;
+	height: 200px;
+	min-width: 630px;
+	background-color: #e8a34a;
+	color: #f73b4e;
+
+}
+
+.panel > .panel-heading, btn {
+	background-color: #e8a34a;
+	text-align: center;
+}
+.form-group {
+	display: inline-block;
+	text-align: center;
+}
+.panel {
+	min-width: 630px;
+}
+#form-center {
+	width:630px;
+	display: block;
+	padding-top: 10px;
+	margin: 0 auto;
+}
+input {
+	margin-top: 10px;
+}
+.table-striped {
+	text-align: center;
+}
+.footer {
+	width: 100%;
+	height: 25px;
+	padding-top: 5px;
+	background-color: #f7a53b;
+	text-align: center;
+	color: #f73b4e;
+	min-width: 630px;
+}
