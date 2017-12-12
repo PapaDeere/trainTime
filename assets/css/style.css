@@ -6,7 +6,9 @@ body {
 	padding-top: 15px;
 	height: 200px;
 	min-width: 630px;
-	background-color: #e8a34a;
+	background-image: url("../images/indianTrain.gif");
+	background-position: top;
+	background-size: 100%;
 	color: #f73b4e;
 
 }
