@@ -5,26 +5,34 @@
                 databaseURL: "https://traintime-144a3.firebaseio.com",
                 projectId: "traintime-144a3",
                 storageBucket: "traintime-144a3.appspot.com",
-                messagingSenderId: "567095252165"
+                messagingSenderId: "567095252165",
             };
             firebase.initializeApp(config);
 
             var database = firebase.database();
+
+var trainName = "";
+var destination = "";
+var firstTrain = "";
+var frequency = "";
+
             // Button for adding trains
-            $("#addTrainBtn").on("click", function(){
+            $("#addTrainBtn").on("click", function(event){
+            	event.preventDefault();
+
                 //Set variables from user input
-                var trainName = $("#trainNameInput").val().trim();
-                var destination = $("#destInput").val().trim();
-                var firstTrainUnix = moment($("#timeInput").val().trim(), "HH:mm").subtract(10, "years").format("X");
-                var frequency = $("#frequencyInput").val().trim();
+                trainName = $("#trName").val().trim();
+                destination = $("#trDest").val().trim();
+                firstTrain = moment($("#trTime").val().trim(), "HH,mm").subtract(10, "years").format("HH");
+                frequency = $("#trFreq").val().trim();
 
                 //create new object and push to the database
-                var newTrain = {
+    			database.ref().push({
                     name: trainName,
                     dest: destination,
-                    first: firstTrainUnix,
+                    first: firstTrain,
                     freq: frequency,
-                }
+                })
                 database.ref().push(newTrain);
 
                 console.log(newTrain.name); console.log(newTrain.dest); console.log(first); console.log(freq);
@@ -38,7 +46,7 @@
 database.ref().on("child_added", function(childSnapshot, prevChildKey){
 	console.log(childSnapshot.val());
 	//store in a variable
-	var trName = childSnapshot.val().name;
+	var trName = childSnapshot.val().trainName;
 	var trDestination = childSnapshot.val().destination;
 	var trFirstTrain = childSnapshot.val().firstTrain;
 	var trFrequency = childSnapshot.val().frequency;
@@ -47,15 +55,15 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey){
 var currentTime = moment();
 console.log(moment(currentTime).format("HH:mm"));
 
-var firstTimeConverted = moment(newFirstTime, "HH:mm").subtract(1,"days");
+var firstTimeConverted = moment(trFirstTrain, "HH:mm").subtract(1,"days");
 
-timeDiff = moment().diff(moment(firstTimeConverted), "minutes");
+var timeDiff = moment().diff(moment(firstTimeConverted), "minutes");
 console.log("Difference in time: " + timeDiff);
 
-var remainder = timeDiff % newFrequency;
+var remainder = timeDiff % trFrequency;
 console.log("Remainder: ", remainder);
 
-var minsUntilTrain = newFrequency - remainder;
+var minsUntilTrain = trFrequency - remainder;
 console.log("Time Until Train: " + minsUntilTrain);
 
 var nextTrainTime = moment().add(minsUntilTrain, "minutes");

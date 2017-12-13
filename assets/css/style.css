@@ -1,6 +1,3 @@
-body {
-
-}
 
 .jumbotron {
 	padding-top: 15px;
@@ -13,7 +10,12 @@ body {
 
 }
 
-.panel > .panel-heading, btn {
+.panel-heading {
+	padding: 15px;
+	margin: 5px;
+}
+
+.panel-title, th, h2 {
 	background-color: #e8a34a;
 	text-align: center;
 }
@@ -23,19 +25,19 @@ body {
 }
 .panel {
 	min-width: 630px;
+	margin-bottom: 5px;
+
 }
 #form-center {
 	width:630px;
 	display: block;
-	padding-top: 10px;
+	padding-top: 5px;
 	margin: 0 auto;
 }
 input {
 	margin-top: 10px;
 }
-.table-striped {
-	text-align: center;
-}
+
 .footer {
 	width: 100%;
 	height: 25px;
